@@ -65,7 +65,7 @@ jobs:
         run: |
           mkdir -p target
           mv package/*.jar target
-          docker compose up
+          docker-compose up
       - name: Setup Test Env
         run: |
           python -m pip install --upgrade pip
