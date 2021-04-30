@@ -70,10 +70,17 @@ jobs:
           docker ps -a
           cd target
           ls -lR | more
+      -
+        name: Push to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          repository: totanya/java-api-test
+          tag_with_ref: true
       - name: Setup Test Env
         run: |
           ls
-
           curl http://localhost:8080/api/v1/accounts
           python -m pip install --upgrade pip
           pip install robotframework
