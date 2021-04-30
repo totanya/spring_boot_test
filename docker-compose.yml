@@ -18,3 +18,9 @@ services:
       - POSTGRES_PASSWORD=123
       - POSTGRES_USER=postgres
       - POSTGRES_DB=test_database
+#  robot:
+#    image: ppodgorsek/robot-framework:latest
+#    environment:
+#      - POSTGRES_PASSWORD=123
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_DB=test_database
