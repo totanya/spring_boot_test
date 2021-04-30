@@ -66,7 +66,7 @@ jobs:
           mkdir -p target
           mv package/*.jar target
           ls
-          docker build -f Dockerfile -t java-spring-api
+          docker build -t java-spring-api
           docker-compose up --detach
       - name: Setup Test Env
         run: |
