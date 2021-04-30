@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/test/robotframework/output.xml
+/src/test/robotframework/log.html
+/src/test/robotframework/report.html
