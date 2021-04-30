@@ -3,7 +3,7 @@ Documentation  My first Robot test
 Resource     helper_keywords.robot
 
 *** Test Cases ***
-Test_POST
+Scenario 1
     Given User can access the API
     When User fill the field id with "1"
     And User fill the field "name" with "Generic Name"
