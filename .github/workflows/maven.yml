@@ -68,6 +68,8 @@ jobs:
           docker-compose build
           docker-compose up --detach
           docker ps -a
+          cd target
+          ls -lR | more
       - name: Setup Test Env
         run: |
           ls
