@@ -67,6 +67,7 @@ jobs:
           mv package/*.jar target
           docker-compose build
           docker-compose up --detach
+          docker ps -a
       - name: Setup Test Env
         run: |
           ls
