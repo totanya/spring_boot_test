@@ -66,13 +66,14 @@ jobs:
           mkdir -p target
           mv package/*.jar target
           docker-compose build
-          docker-compose up --detach
+          docker-compose run --service-ports
           docker ps -a
           cd target
           ls -lR | more
       - name: Setup Test Env
         run: |
           ls
+
           curl http://localhost:8080/api/v1/accounts
           python -m pip install --upgrade pip
           pip install robotframework
