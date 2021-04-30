@@ -65,7 +65,8 @@ jobs:
         run: |
           mkdir -p target
           mv package/*.jar target
-          docker-compose up
+          docker build -f Dockerfile -t java-spring-api
+          docker-compose up --detach
       - name: Setup Test Env
         run: |
           python -m pip install --upgrade pip
