@@ -69,10 +69,11 @@ jobs:
           docker-compose up --detach
       - name: Setup Test Env
         run: |
+          ls
           python -m pip install --upgrade pip
           pip install robotframework
       - name: Run Robot Tests
-        run:  python -m robot src/test/acceptance/first-test.robot
+        run:  python -m robot src/test/robotframework/acceptance/first-test.robot
       - name: Access secrets
         run: echo "Content of secret - ${{ secrets.DOCKER_HUB_USERNAME }}"
       - name: Push Docker images
