@@ -70,14 +70,14 @@ jobs:
           docker-compose up -d
           docker ps -a
           docker logs backend
-
+          docker logs postgresqldb
       - name: Setup Test Env
         run: |
-          curl http://localhost:8080/api/v1/accounts
           python -m pip install --upgrade pip
           pip install robotframework
           pip install robotframework-requests
 
+          curl http://localhost:8080/api/v1/accounts
       - name: Run Robot Tests
         run:  python -m robot src/test/robotframework/acceptance/first-test.robot
 
