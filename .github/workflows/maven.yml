@@ -76,8 +76,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install robotframework
           pip install robotframework-requests
-
+          sleep 10
           curl http://localhost:8080/api/v1/accounts
+
+
       - name: Run Robot Tests
         run:  python -m robot src/test/robotframework/acceptance/first-test.robot
 
