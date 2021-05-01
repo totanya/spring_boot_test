@@ -54,13 +54,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    name: Build Docker and Test
+    name: Build Docker, Test, Push to Docker Hub
     steps:
       - uses: actions/checkout@v1
       - name: Download Maven build artifact
         uses: actions/download-artifact@v1
         with:
           name: package
+
       - name: Build Docker container
         run: |
           mkdir -p target
@@ -69,28 +70,24 @@ jobs:
           docker-compose up -d
           docker ps -a
           docker logs backend
-          cd target
-          ls -lR | more
-      -
-        name: Push to Docker Hub
+
+      - name: Setup Test Env
+        run: |
+          curl http://localhost:8080/api/v1/accounts
+          python -m pip install --upgrade pip
+          pip install robotframework
+          pip install robotframework-requests
+
+      - name: Run Robot Tests
+        run:  python -m robot src/test/robotframework/acceptance/first-test.robot
+
+      - name: Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           repository: totanya/java-api-test
           tag_with_ref: true
-      - name: Setup Test Env
-        run: |
-          ls
-          curl http://localhost:8080/api/v1/accounts
-          python -m pip install --upgrade pip
-          pip install robotframework
-          pip install robotframework-requests
-      - name: Run Robot Tests
-        run:  python -m robot src/test/robotframework/acceptance/first-test.robot
-      - name: Access secrets
-        run: echo "Content of secret - ${{ secrets.DOCKER_HUB_USERNAME }}"
-      - name: Push Docker images
-        run: echo "Pushing Docker image to Container Registry (e.g. ECR)"
+
       - name: Deploy application
         run: echo "Deploying application (e.g. Kubernetes)"
