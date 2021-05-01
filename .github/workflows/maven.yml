@@ -66,9 +66,8 @@ jobs:
           mkdir -p target
           mv package/*.jar target
           docker-compose build
-          docker-compose up --detach
+          docker-compose up
           docker ps -a
-          docker exec
           cd target
           ls -lR | more
       -
